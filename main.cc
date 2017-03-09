@@ -5,7 +5,6 @@
 
 /*
  * TODO: 
- *      - add predefined queries ( display full table, one entry)
  *      - add data
  *      - delete data
  * */

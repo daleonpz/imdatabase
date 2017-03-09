@@ -58,7 +58,8 @@ int DBinterface::display_menu() {
     cout << "Que quieres hacer?" << endl;
     cout << "(1) mostrar datos" << endl;
     cout << "(2) actualizar los datos de un alumno" << endl;
-    cout << "(3) borrar datos de un alumno" << endl;
+    cout << "(3) agregar una entrada nueva" << endl;
+    cout << "(4) borrar datos de un alumno" << endl;
 
     cin >> option;
 
@@ -74,6 +75,13 @@ int DBinterface::display_menu() {
         case 2:
             update_data();
             break;
+
+        case 3:
+            add_data();
+            break;
+
+        case 4:
+            delete_data();
     }
 
     return 0;
@@ -212,6 +220,55 @@ void DBinterface::update_data() {
 
     query = "update parkour set " + field + " = " + newvalue +
                 "where " + query;
+   
+    res = PQexec(conn, query.c_str() );  
+
+    PQclear(res);
+}
+
+void DBinterface::add_data(){
+    PGresult *res;
+    PQclear(res);
+}
+
+void DBinterface::delete_data() {
+    PGresult *res;
+    string op;
+    string query;
+    string oldvalue;
+
+    oldvalue = retrieve_data();
+    if(oldvalue.compare("0")==0) exit(0);
+    
+    cout << "Esta seguro de borrar esa data? [s/n]" <<endl;
+    cin >> op;
+
+    if (op.compare("n")==0)
+        exit(0);
+    if (op.compare("s")!=0 ){
+        cout << "opcion invalida" << endl;
+        exit(1);
+    }
+
+    switch(oldvalue.at(0)) {
+            case '1':
+                query = "codigo = " ; 
+                oldvalue.erase(0,1);
+                query += oldvalue;
+                break;
+            case '2':
+                query = "correo = '"; 
+                oldvalue.erase(0,1); 
+                query += oldvalue + "'";
+                break;
+            case '3':
+                query = "nombre = '"; 
+                oldvalue.erase(0,1);    
+                query += oldvalue + "'";
+            }
+
+
+    query = "delete from parkour where " + query;
    
     res = PQexec(conn, query.c_str() );  
 

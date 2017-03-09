@@ -25,5 +25,7 @@ class DBinterface {
         int display_menu() ;
         string retrieve_data();
         void update_data() ;
+        void add_data();
+        void delete_data() ;
 };
 #endif
