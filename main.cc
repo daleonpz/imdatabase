@@ -1,8 +1,7 @@
 #include <stdio.h>
 //#include <libpq-fe.h>
 #include <stdlib.h>
-#include "parse.h"
-#include "db_interface.h"
+#include "headers/db_interface.h"
 
 /*
  * TODO: 
