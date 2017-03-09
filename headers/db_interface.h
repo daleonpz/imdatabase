@@ -23,7 +23,7 @@ class DBinterface {
 
         void checkconnection() ;
         int display_menu() ;
-        void retrieve_data(int );
+        string retrieve_data();
         void update_data() ;
 };
 #endif

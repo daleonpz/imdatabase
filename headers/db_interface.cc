@@ -56,11 +56,9 @@ int DBinterface::display_menu() {
     int option;
 
     cout << "Que quieres hacer?" << endl;
-    cout << "(1) mostrar toda la data" << endl;
-    cout << "(2) buscar datos usando el codigo del alumno" << endl;
-    cout << "(3) buscar datos usando el correo del alumno" << endl;
-    cout << "(4) actualizar los datos de un alumno" << endl;
-    cout << "(5) borrar datos de un alumno" << endl;
+    cout << "(1) mostrar datos" << endl;
+    cout << "(2) actualizar los datos de un alumno" << endl;
+    cout << "(3) borrar datos de un alumno" << endl;
 
     cin >> option;
 
@@ -69,30 +67,37 @@ int DBinterface::display_menu() {
     }
 
     switch(option){
-        case 1: case 2 : case 3:
-            retrieve_data(option-1);
+        case 1: 
+            retrieve_data();
             break;
 
-        case 4:
+        case 2:
+            update_data();
             break;
     }
-
-
 
     return 0;
 }
 
 
 
-void DBinterface::retrieve_data(int qtype) {
+string DBinterface::retrieve_data() {
     PGresult *res;
-    string query, codigo, email;
+    string query, field;
+    int qtype;
     int ntuples;
     int nfields;
     int i,j;
 
   //  cout << "Table name: ";
   //  cin >> query;
+    cout << "\nQue desea hacer?" << endl;
+    cout << "(0) mostrar toda la tabla" << endl;
+    cout << "(1) buscar datos usando el codigo del alumno" << endl;
+    cout << "(2) buscar datos usando el correo del alumno" << endl;
+    cout << "(3) buscar datos usando el nombre del alumno" << endl;
+
+    cin >> qtype;
 
     switch(qtype){
         case 0:
@@ -101,15 +106,23 @@ void DBinterface::retrieve_data(int qtype) {
     
         case 1:
             cout << "Ingrese codigo:" << endl;
-            cin >> codigo;
-            query = "select * from parkour where codigo = " + codigo;
+            cin >> field;
+            query = "select * from parkour where codigo = " + field;
             break;
 
         case 2:
             cout << "Ingrese correo:" << endl;
-            cin >> email;
-            query = "select * from parkour where correo = " + email;
+            cin >> field;
+            query = "select * from parkour where correo = " + field;
             break;
+        
+        case 3:
+            cout << "Ingrese nombre:" << endl;
+            cin.ignore();
+            getline(cin,field);
+            query = "select * from parkour where nombre = " + field;
+            break;
+
     }
 
     res = PQexec(conn, query.c_str() );
@@ -138,12 +151,49 @@ void DBinterface::retrieve_data(int qtype) {
         puts("");
     }
  
-    PQclear(res);  
+    PQclear(res); 
+    return(field); 
 }
 
 void DBinterface::update_data() {
     PGresult *res;
-/*
+    string field;
+    string op;
+    string query;
+    string oldvalue;
+    string newvalue;
+
+    oldvalue = retrieve_data();
+    
+    cout << "Esta seguro de cambiar esa data? [s/n]" <<endl;
+    cin >> op;
+
+    if (op.compare("n"))
+        exit(1);
+    if (~op.compare("n") && ~op.compare("s") ){
+        cout << "opcion invalida" << endl;
+        exit(1);
+    }
+
+    cout << "Que es lo que desea cambiar? [codigo/correo/nombre]" << endl;
+    cin >> field;
+   
+    if (~op.compare("codigo") && ~op.compare("nombre") && ~op.compare("correo") ){
+        cout << "opcion invalida" << endl;
+        exit(1);
+    } 
+  /*  switch (field.c_str()){
+        case "codigo": case "nombre": case "correo":
+            break;
+        case default:
+            cout << "campo invalido" << endl;
+            exit(1);
+    }
+*/
+    query = "update parkour set " + field + " = " + oldvalue +
+                     " where " + field + " = " + newvalue;
+    
+    /*
     char c[] = "*"; 
     retrieve_data(c,0);
 
