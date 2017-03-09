@@ -228,6 +228,29 @@ void DBinterface::update_data() {
 
 void DBinterface::add_data(){
     PGresult *res;
+    string query;
+    string data;
+
+    query = "insert into parkour values ( ";
+
+    cout << "Ingrese codigo del alumno" << endl;
+    cin >> data;
+
+    query += ( data + " , ");
+
+    cout << "Ingrese nombre del alumno" << endl;
+    cin.ignore();
+    getline(cin, data);
+    
+    query += ( "'" + data + "' , ");
+
+    cout << "Ingrese correo del alumno" << endl;
+    cin.ignore();
+    cin >> data;
+
+    query += ( "'" + data + "' )" ) ;    
+
+    res = PQexec(conn, query.c_str() ) ;
     PQclear(res);
 }
 

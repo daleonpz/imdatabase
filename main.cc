@@ -5,8 +5,7 @@
 
 /*
  * TODO: 
- *      - add data
- *      - delete data
+ *      - validate data inputs
  * */
 
 
