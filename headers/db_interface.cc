@@ -89,8 +89,6 @@ string DBinterface::retrieve_data() {
     int nfields;
     int i,j;
 
-  //  cout << "Table name: ";
-  //  cin >> query;
     cout << "\nQue desea hacer?" << endl;
     cout << "(0) mostrar toda la tabla" << endl;
     cout << "(1) buscar datos usando el codigo del alumno" << endl;
@@ -113,14 +111,14 @@ string DBinterface::retrieve_data() {
         case 2:
             cout << "Ingrese correo:" << endl;
             cin >> field;
-            query = "select * from parkour where correo = " + field;
+            query = "select * from parkour where correo = '" + field + "'";
             break;
         
         case 3:
             cout << "Ingrese nombre:" << endl;
             cin.ignore();
             getline(cin,field);
-            query = "select * from parkour where nombre = " + field;
+            query = "select * from parkour where nombre = '" + field + "'";
             break;
 
     }
@@ -152,7 +150,7 @@ string DBinterface::retrieve_data() {
     }
  
     PQclear(res); 
-    return(field); 
+    return(  to_string(qtype) + field ); 
 }
 
 void DBinterface::update_data() {
@@ -164,13 +162,14 @@ void DBinterface::update_data() {
     string newvalue;
 
     oldvalue = retrieve_data();
+    if(oldvalue.compare("0")==0) exit(0);
     
     cout << "Esta seguro de cambiar esa data? [s/n]" <<endl;
     cin >> op;
 
-    if (op.compare("n"))
-        exit(1);
-    if (~op.compare("n") && ~op.compare("s") ){
+    if (op.compare("n")==0)
+        exit(0);
+    if (op.compare("s")!=0 ){
         cout << "opcion invalida" << endl;
         exit(1);
     }
@@ -178,28 +177,43 @@ void DBinterface::update_data() {
     cout << "Que es lo que desea cambiar? [codigo/correo/nombre]" << endl;
     cin >> field;
    
-    if (~op.compare("codigo") && ~op.compare("nombre") && ~op.compare("correo") ){
+    if (!(  field.compare("codigo")==0 ||
+            field.compare("nombre")==0 || 
+            field.compare("correo")==0 )
+            ){
         cout << "opcion invalida" << endl;
         exit(1);
     } 
-  /*  switch (field.c_str()){
-        case "codigo": case "nombre": case "correo":
-            break;
-        case default:
-            cout << "campo invalido" << endl;
-            exit(1);
+
+    switch(oldvalue.at(0)) {
+            case '1':
+                query = "codigo = " ; 
+                oldvalue.erase(0,1);
+                query += oldvalue;
+                break;
+            case '2':
+                query = "correo = '"; 
+                oldvalue.erase(0,1); 
+                query += oldvalue + "'";
+                break;
+            case '3':
+                query = "nombre = '"; 
+                oldvalue.erase(0,1);    
+                query += oldvalue + "'";
+            }
+
+    cout << "\nIngrese el nuevo valor" << endl;
+    cin.ignore();
+    getline( cin, newvalue);
+
+    if ( field.compare("codigo")!=0){
+        newvalue = "'" + newvalue + "'";
     }
-*/
-    query = "update parkour set " + field + " = " + oldvalue +
-                     " where " + field + " = " + newvalue;
-    
-    /*
-    char c[] = "*"; 
-    retrieve_data(c,0);
 
-    cout << "what do you want to update:" << endl;
-    string field;
-    cin >> field;
-*/
+    query = "update parkour set " + field + " = " + newvalue +
+                "where " + query;
+   
+    res = PQexec(conn, query.c_str() );  
 
+    PQclear(res);
 }
