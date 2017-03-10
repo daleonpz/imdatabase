@@ -38,5 +38,6 @@ $(TARGET3): $(OBJ3)
 clean:
 	rm -rf *~
 	rm -rf *.o
+	rm main
 
 

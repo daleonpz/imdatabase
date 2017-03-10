@@ -236,6 +236,11 @@ void DBinterface::add_data(){
     cout << "Ingrese codigo del alumno" << endl;
     cin >> data;
 
+    if (data.length() != 8) {
+        cout << "Debe ingresar 8 digitos" << endl;
+        exit(1);
+    }
+
     query += ( data + " , ");
 
     cout << "Ingrese nombre del alumno" << endl;
