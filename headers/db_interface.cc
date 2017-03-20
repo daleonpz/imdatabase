@@ -99,9 +99,10 @@ string DBinterface::retrieve_data() {
 
     cout << "\nQue desea hacer?" << endl;
     cout << "(0) mostrar toda la tabla" << endl;
-    cout << "(1) buscar datos usando el codigo del alumno" << endl;
-    cout << "(2) buscar datos usando el correo del alumno" << endl;
-    cout << "(3) buscar datos usando el nombre del alumno" << endl;
+    cout << "(1) mostrar una columna en particular" << endl;
+    cout << "(2) buscar datos usando el codigo del alumno" << endl;
+    cout << "(3) buscar datos usando el correo del alumno" << endl;
+    cout << "(4) buscar datos usando el nombre del alumno" << endl;
 
     cin >> qtype;
 
@@ -109,20 +110,26 @@ string DBinterface::retrieve_data() {
         case 0:
             query = "select * from parkour";
             break;
-    
+
         case 1:
+            cout << "Ingrese columna a mostrar:" << endl;
+            cin >> field;
+            query = "select " + field + " from parkour";
+            break;
+    
+        case 2:
             cout << "Ingrese codigo:" << endl;
             cin >> field;
             query = "select * from parkour where codigo = " + field;
             break;
 
-        case 2:
+        case 3:
             cout << "Ingrese correo:" << endl;
             cin >> field;
             query = "select * from parkour where correo = '" + field + "'";
             break;
         
-        case 3:
+        case 4:
             cout << "Ingrese nombre:" << endl;
             cin.ignore();
             getline(cin,field);
@@ -147,7 +154,7 @@ string DBinterface::retrieve_data() {
         cout << "|";  
          }
     puts("");
-    cout << string(62,'-') << endl;
+    cout << string(nfields*21,'-') << endl;
 
     for (i=0; i<ntuples; i++) {
         for (j=0; j<nfields; j++) {
