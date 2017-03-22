@@ -257,7 +257,6 @@ void DBinterface::add_data(){
     query += ( "'" + data + "' , ");
 
     cout << "Ingrese correo del alumno" << endl;
-    cin.ignore();
     cin >> data;
 
     query += ( "'" + data + "' )" ) ;    
