@@ -63,7 +63,7 @@ int DBinterface::display_menu() {
 
     cin >> option;
 
-    if ((option < 1 ) || (option > 3) ){
+    if ((option < 1 ) || (option > 4) ){
         return 1;
     }
 
@@ -201,17 +201,17 @@ void DBinterface::update_data() {
     } 
 
     switch(oldvalue.at(0)) {
-            case '1':
+            case '2':
                 query = "codigo = " ; 
                 oldvalue.erase(0,1);
                 query += oldvalue;
                 break;
-            case '2':
+            case '3':
                 query = "correo = '"; 
                 oldvalue.erase(0,1); 
                 query += oldvalue + "'";
                 break;
-            case '3':
+            case '4':
                 query = "nombre = '"; 
                 oldvalue.erase(0,1);    
                 query += oldvalue + "'";
@@ -285,17 +285,17 @@ void DBinterface::delete_data() {
     }
 
     switch(oldvalue.at(0)) {
-            case '1':
+            case '2':
                 query = "codigo = " ; 
                 oldvalue.erase(0,1);
                 query += oldvalue;
                 break;
-            case '2':
+            case '3':
                 query = "correo = '"; 
                 oldvalue.erase(0,1); 
                 query += oldvalue + "'";
                 break;
-            case '3':
+            case '4':
                 query = "nombre = '"; 
                 oldvalue.erase(0,1);    
                 query += oldvalue + "'";
