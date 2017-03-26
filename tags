@@ -1,0 +1,50 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+CC	Makefile	/^CC=g++$/;"	m
+CFLAGS	Makefile	/^CFLAGS= $(OPT_1) $(DEBUG) -c$/;"	m
+DB_INPUT	headers/parse.h	/^} DB_INPUT; $/;"	t	typeref:struct:__anon1
+DBinterface	headers/db_interface.cc	/^DBinterface::DBinterface(DB_INPUT* inputs){$/;"	f	class:DBinterface
+DBinterface	headers/db_interface.h	/^class DBinterface {$/;"	c
+DEBUG	Makefile	/^DEBUG= -O0 -g$/;"	m
+LFLAGS	Makefile	/^LFLAGS= $(OPT_1) $(DEBUG)$/;"	m
+LIB	Makefile	/^LIB=-lpq$/;"	m
+MAX_LENGTH	headers/parse.h	11;"	d
+MAX_LENGTH_INPUT	headers/parse.h	12;"	d
+OBJ	Makefile	/^OBJ= main.o db_interface.o parse.o$/;"	m
+OBJ1	Makefile	/^OBJ1=headers\/db_interface.h$/;"	m
+OBJ2	Makefile	/^OBJ2= headers\/db_interface.h $(SRC2)  headers\/parse.h$/;"	m
+OBJ3	Makefile	/^OBJ3= headers\/parse.h $(SRC3)$/;"	m
+OPT_1	Makefile	/^OPT_1= -Wall -Wextra $/;"	m
+OPT_2	Makefile	/^OPT_2= -O2$/;"	m
+SRC1	Makefile	/^SRC1=main.cc $/;"	m
+SRC2	Makefile	/^SRC2= headers\/db_interface.cc$/;"	m
+SRC3	Makefile	/^SRC3= headers\/parse.cc$/;"	m
+TARGET1	Makefile	/^TARGET1= main.o$/;"	m
+TARGET2	Makefile	/^TARGET2= db_interface.o$/;"	m
+TARGET3	Makefile	/^TARGET3= parse.o$/;"	m
+_DB_INTERFACE_H_	headers/db_interface.h	2;"	d
+_PARSE_H_	headers/parse.h	2;"	d
+add_data	headers/db_interface.cc	/^void DBinterface::add_data(){$/;"	f	class:DBinterface
+checkconnection	headers/db_interface.cc	/^void DBinterface::checkconnection() {$/;"	f	class:DBinterface
+conn	headers/db_interface.h	/^        PGconn *conn;$/;"	m	class:DBinterface
+dbhost	headers/parse.h	/^    const char *dbhost;$/;"	m	struct:__anon1
+dbname	headers/parse.h	/^    const char *dbname;$/;"	m	struct:__anon1
+dbpassword	headers/parse.h	/^    char *dbpassword;$/;"	m	struct:__anon1
+dbuser	headers/parse.h	/^    const char *dbuser;$/;"	m	struct:__anon1
+delete_data	headers/db_interface.cc	/^void DBinterface::delete_data() {$/;"	f	class:DBinterface
+display_menu	headers/db_interface.cc	/^int DBinterface::display_menu() {$/;"	f	class:DBinterface
+free_dbinputs	headers/parse.cc	/^void free_dbinputs(DB_INPUT *input){$/;"	f
+getch	headers/parse.cc	/^int getch() {$/;"	f
+getpass	headers/parse.cc	/^void getpass(char **pass )$/;"	f
+init_dbinputs	headers/parse.cc	/^void init_dbinputs(DB_INPUT *input){$/;"	f
+main	main.cc	/^int main(int argc, char* argv[]) {$/;"	f
+opts_list	headers/parse.cc	/^struct option opts_list[] = {$/;"	v	typeref:struct:option
+parse_input	headers/parse.cc	/^int parse_input(int argc, char **argv, DB_INPUT *inputs)$/;"	f
+printElement	headers/db_interface.cc	/^template<typename T> void printElement(T t)$/;"	f
+retrieve_data	headers/db_interface.cc	/^string DBinterface::retrieve_data() {$/;"	f	class:DBinterface
+update_data	headers/db_interface.cc	/^void DBinterface::update_data() {$/;"	f	class:DBinterface
+~DBinterface	headers/db_interface.cc	/^DBinterface::~DBinterface(){$/;"	f	class:DBinterface
